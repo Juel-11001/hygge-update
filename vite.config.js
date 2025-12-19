@@ -6,34 +6,24 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
     plugins: [
         laravel({
-            input: ["resources/css/app.css", "resources/js/app.jsx"],
-            refresh: false, // production
-            build: {
-                outDir: "../public_html/build",
-                emptyOutDir: true,
-                manifest: true,
-                rollupOptions: {
-                    input: {
-                        app: "resources/js/app.jsx",
-                    },
-                },
-            },
+            input: [
+                "resources/css/app.css",
+                "resources/js/app.jsx",
+            ],
+            refresh: false,
         }),
         react(),
         tailwindcss(),
     ],
+
     build: {
-        outDir: "../public_html/build",
+        outDir: "public/build", // MUST
         emptyOutDir: true,
-        manifest: true,
+        manifest: true,         // MUST
         minify: "esbuild",
         sourcemap: false,
     },
-    base: "/", // cPanel root
-    assetsInclude: ["**/*.woff", "**/*.woff2", "**/*.ttf", "**/*.otf"],
-    resolve: {
-        alias: {
-            "@": "/resources/js",
-        },
-    },
+
+    base: "/build/",
 });
+
